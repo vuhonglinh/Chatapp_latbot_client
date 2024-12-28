@@ -14,6 +14,9 @@ export default defineConfig({
     vueJsx(),
     vueDevTools(),
   ],
+  server: {
+    port: 3000,
+  },
   css: {
     postcss: {
       plugins: [tailwind(), autoprefixer()],

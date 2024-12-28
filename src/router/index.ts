@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Auth/Login.vue'
-import Register from '../views/Auth/Register.vue'
+import Callback from '../views/Auth/Callback.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +11,9 @@ const router = createRouter({
       component: Login,
     },
     {
-      path: '/register',
-      name: 'register',
-      component: Register,
+      path: '/login/callback',
+      name: 'callback',
+      component: Callback,
     },
   ],
 })

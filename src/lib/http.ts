@@ -1,5 +1,6 @@
 
-import axios from 'axios';
+
+import axios, { AxiosError } from 'axios';
 
 class Http {
   public instance;
@@ -24,14 +25,7 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config;
-        if (['/login', '/register', '/remember-me'].some(item => item === (url || ''))) {
-          // const { access_token, refresh_token } = response.data.data.token as TokenType;
-          // const user = response.data.data.user as UserType;
-          // localStorage.setItem('access_token', access_token);
-          // localStorage.setItem('refresh_token', refresh_token);
-          // localStorage.setItem('user', JSON.stringify(user));
-          // Cookies.set('sessionToken', access_token, { path: '/', sameSite: 'lax', secure: true });
-        } else if ('/logout' === (url || '')) {
+        if ('/logout' === (url || '')) {
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
           localStorage.removeItem('user');
@@ -39,7 +33,11 @@ class Http {
         }
         return response;
       },
-      (error) => {
+      (error: AxiosError) => {
+        if (error.status === 401) {
+          window.location.href = '/login';
+          return;
+        }
         return Promise.reject(error);
       }
     );

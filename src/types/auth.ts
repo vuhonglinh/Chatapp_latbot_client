@@ -1,5 +1,5 @@
 
-export type typeUser = {
+export type TypeUser = {
   name: string
   avatar: string
   date_of_birth: string
@@ -11,8 +11,8 @@ export type typeUser = {
 }
 
 export type typeToken = {
-  accessToken: string,
-  refreshToken: string
+  access_token: string,
+  refresh_token: string
 }
 
 export type typeAuthCallback = {
@@ -23,6 +23,6 @@ export type typeAuthCallback = {
 }
 
 export type typeAuth = {
-  user?: typeUser
+  user?: TypeUser
   token?: typeToken
 }

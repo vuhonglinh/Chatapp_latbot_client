@@ -8,5 +8,8 @@ export const authApi = {
   },
   callback: (data: typeAuthCallback) => {
     return http.post<TypeResponse<typeAuth>>('auth/google/callback', data)
+  },
+  logout: () => {
+    return http.post<TypeResponse<null>>('logout')
   }
 }

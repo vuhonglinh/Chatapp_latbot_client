@@ -13,6 +13,7 @@
   "framework": "vite",
   "aliases": {
     "components": "@/components",
+    "views": "@/views",
     "utils": "@/lib/utils"
   }
 }

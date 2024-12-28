@@ -20,8 +20,8 @@ onMounted(() => {
         if (response.data.data && response.data.data.token && response.data.data.user) {
           const { user, token } = response.data.data
           localStorage.setItem('user', JSON.stringify(user))
-          localStorage.setItem('access_token', token?.accessToken)
-          localStorage.setItem('refresh_token', token?.refreshToken)
+          localStorage.setItem('access_token', token?.access_token)
+          localStorage.setItem('refresh_token', token?.refresh_token)
           toast({
             title: response.data.message,
             description: `Chào mừng, ${user?.name}!`,

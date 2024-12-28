@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { authApi } from '@/apis/auth.api'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/toast'
+import { onMounted } from 'vue'
+
+const { toast } = useToast()
+
 const handleLogin = async () => {
   await authApi.login().then((response) => {
     const redirectUrl = response.data.data
@@ -10,7 +15,11 @@ const handleLogin = async () => {
   })
 }
 
-
+onMounted(() => {
+  toast({
+    title: 'Vui lòng đăng nhập',
+  })
+})
 </script>
 
 <template>

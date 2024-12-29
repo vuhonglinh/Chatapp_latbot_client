@@ -9,8 +9,8 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from '@/components/ui/command'
-import { RouterLink, RouterView } from 'vue-router'
-import { Calculator, Calendar, CreditCard, Settings, Smile, User } from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
+import { Calculator, Calendar, CreditCard, Smile, User } from 'lucide-vue-next'
 
 import { useUserStore } from '@/stores/users.ts'
 import { ref } from 'vue'
@@ -47,10 +47,22 @@ userStore.getUsers().then(() => {
       <CommandGroup heading="Bạn bè">
         <CommandItem :value="user.slug" v-for="(user, index) in users" :key="index">
           <CreditCard class="mr-2 h-4 w-4" />
-          <RouterLink :to="user.slug">{{ user.name }}</RouterLink>
+          <RouterLink
+            :to="user.slug"
+            :class="{ 'router-link-active': ($route.path ? $route.path : null) === user.slug }"
+          >
+            {{ user.name }}
+          </RouterLink>
           <CommandShortcut>⌘B</CommandShortcut>
         </CommandItem>
       </CommandGroup>
     </CommandList>
   </Command>
 </template>
+
+<style scoped>
+.router-link-active {
+  font-weight: bold;
+  color: red;
+}
+</style>

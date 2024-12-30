@@ -1,6 +1,7 @@
 import http from "@/lib/http"
-import type { typeAuth, typeAuthCallback } from "@/types/auth";
-import type { TypeResponse } from '@/types/core';
+import type {typeAuth, typeAuthCallback} from "@/types/auth";
+import type {TypeResponse} from '@/types/core';
+import {TypeUser} from "../types/auth";
 
 export const authApi = {
   login: () => {
@@ -11,5 +12,8 @@ export const authApi = {
   },
   logout: () => {
     return http.post<TypeResponse<null>>('logout')
+  },
+  profile: () => {
+    return http.get<TypeResponse<TypeUser>>('profile')
   }
 }

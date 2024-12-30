@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import {useAccountStore} from "../stores/account";
 
 const { toast } = useToast()
 const handleLogout = () => {
@@ -21,6 +22,7 @@ const handleLogout = () => {
     })
   })
 }
+const account = useAccountStore()
 </script>
 
 <template>
@@ -28,16 +30,14 @@ const handleLogout = () => {
     <DropdownMenuTrigger as-child>
       <Button variant="secondary" size="icon" class="rounded-full">
         <Avatar class="hidden h-9 w-9 sm:flex">
-          <AvatarImage src="/avatars/01.png" alt="Avatar" />
-          <AvatarFallback>OM</AvatarFallback>
+          <AvatarImage :src="account.avatar" :alt="account.name" />
+          <AvatarFallback>{{ account.name }}</AvatarFallback>
         </Avatar>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuLabel>Hồ sơ</DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>Settings</DropdownMenuItem>
-      <DropdownMenuItem>Support</DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="handleLogout">Đăng xuất</DropdownMenuItem>
     </DropdownMenuContent>

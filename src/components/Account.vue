@@ -12,14 +12,17 @@ import {
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {useAccountStore} from "../stores/account";
+import { useRouter} from "vue-router";
 
 const { toast } = useToast()
-const handleLogout = () => {
-  authApi.logout().then((response) => {
+const router = useRouter()
+const handleLogout = async () => {
+ await authApi.logout().then((response) => {
     toast({
       title: 'Thành công',
       description: response.data.message,
     })
+   router.push('/login')
   })
 }
 const account = useAccountStore()

@@ -5,12 +5,14 @@ import { useToast } from '@/components/ui/toast/use-toast'
 import { authApi } from '@/apis/auth.api'
 import LoadingFullPage from '@/components/LoadingFullPage.vue'
 import type { typeAuthCallback } from '@/types/auth'
+import {useAccountStore} from "../../stores/account";
 
 const { toast } = useToast()
 const router = useRouter()
 
 onMounted(() => {
   const route = useRoute()
+  const account = useAccountStore()
   const { authuser, code, prompt, scope } = route.query as typeAuthCallback
 
   if (authuser && code && prompt && scope) {
@@ -19,6 +21,7 @@ onMounted(() => {
       .then((response) => {
         if (response.data.data && response.data.data.token && response.data.data.user) {
           const { user, token } = response.data.data
+          account.setAccount(user)
           localStorage.setItem('user', JSON.stringify(user))
           localStorage.setItem('access_token', token?.access_token)
           localStorage.setItem('refresh_token', token?.refresh_token)
